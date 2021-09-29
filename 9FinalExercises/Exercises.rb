@@ -59,3 +59,70 @@ p h.delete_if { |k, v| v < 3.5 }
 # Yes.
 # hash = {colors: ['red', 'green', blue'], fruit: ['apples', 'oranges']}
 # array = [{color: 'red'}, {fruit: 'apple'}]
+
+# 11
+contact_data = [["joe@email.com", "123 Main St.", "555-123-4567"], ["sally@email.com", "404 Not Found Dr.", "123-234-3454"]]
+contacts = {"Joe Smith" => {}, "Sally Johnson" => {}}
+
+p contact_data[0][0]
+
+contacts["Joe Smith"][:email] = contact_data[0][0]
+p contacts
+contacts["Joe Smith"][:address] = contact_data[0][1]
+p contacts
+contacts["Joe Smith"][:phone] = contact_data[0][2]
+p contacts
+contacts["Sally Johnson"][:email] = contact_data[1][0]
+contacts["Sally Johnson"][:address] = contact_data[1][1]
+contacts["Sally Johnson"][:phone] = contact_data[1][2]
+p contacts
+
+# 12
+puts "The email for Joe is: #{contacts["Joe Smith"][:email]}"
+puts "The phone number for Sally is: #{contacts["Sally Johnson"][:phone]}"
+
+# 13
+arr4 = ['snow', 'winter', 'ice', 'slippery', 'salted roads', 'white trees']
+
+p arr4.delete_if { |string| string.start_with?("s") }
+p arr4.delete_if { |string| string.start_with?("s", "w") }
+
+# 14
+a = ['white snow', 'winter wonderland', 'melting ice', 'slippery sidewalk', 'salted roads', 'white trees']
+
+a = a.map { |words| words.split }
+a = a.flatten
+p a
+
+# 15
+# These hashes are the same! The order and syntax of each hash may be slightly different, but they keys and values are the same.
+
+# 16
+contact_data = ["joe@email.com", "123 Main St", "555-123-4567"]
+contacts = {"Joe Smith" => {}}
+data_fields = [:email, :address, :phone]
+
+contacts.each do |name, data_hash|
+  data_fields.each do |info|
+    data_hash[info] = contact_data.shift
+  end
+end
+
+p contacts
+
+contact_data2 = [["joe@email.com", "123 Main St", "555-123-4567"], ["sally@email.com", "404 Not Found Dr", "123-234-3454"]]
+contacts2 = { "Joe Smith" => {}, "Sally Johnson" => {} }
+data_fields2 = [:email, :address, :phone]
+
+contacts2.each_with_index do |(name, hash), index|
+  data_fields2.each do |info|
+    hash[info] = contact_data2[index].shift
+  end
+end
+
+p contacts2
+
+contact_data3 = ["joe@email.com", "123 Main St", "555-123-4567"]
+contacts3 = { "Joe Smith" => {} }
+contacts3["Joe Smith"] = contact_data3.first
+p contacts3
