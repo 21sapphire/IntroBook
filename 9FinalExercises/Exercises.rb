@@ -122,7 +122,33 @@ end
 
 p contacts2
 
+# I continued to play around with this problem to see if I could figure out another way to do it.
+
+data_fields3 = [:email, :address, :phone]
 contact_data3 = ["joe@email.com", "123 Main St", "555-123-4567"]
 contacts3 = { "Joe Smith" => {} }
-contacts3["Joe Smith"] = contact_data3.first
+new_hash = {}
+
+data_fields3.each do |field_type|
+  new_hash[field_type] = contact_data3.first
+  contact_data3.slice!(0)
+end
+
+contacts3["Joe Smith"] = new_hash
+
 p contacts3
+
+# Trying this version with Joe and Sally.
+
+data_fields4 = [:email, :address, :phone]
+contact_data4 = [["joe@email.com", "123 Main St", "555-123-4567"], ["sally@email.com", "404 Not Found Dr", "123-234-3454"]]
+contacts4 = { "Joe Smith" => {}, "Sally Johnson" => {} }
+
+contacts4.each_with_index do |(name, data_hash), index|
+  data_fields4.each do |data_type|
+    data_hash[data_type] = contact_data4[index].first
+    contact_data4[index].slice!(0)
+  end
+end
+
+p contacts4
